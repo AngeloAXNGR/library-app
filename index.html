@@ -14,6 +14,31 @@
 <body>
   <div class="header">
     <h1>Library Application</h1>
+
+    <div class="modal">
+      <form action="/action_page.php" id="book-form">
+        <div class="form-row">
+          <label for="book-title">Title <span aria-label="required">*</span></label>
+          <input type="text" id="book-title" name="book-title" required>
+        </div>
+
+        <div class="form-row">
+          <label for="book-author">Author <span aria-label="required">*</span></label>
+          <input type="text" id="book-author" name="book-author" required>
+        </div>
+
+        <div class="form-row">
+          <label for="page-count">Pages <span aria-label="required">*</span></label>
+          <input type="text" id="page-count" name="page-count" required>
+        </div>
+
+        <div class="form-row">
+          <label for="is-read">Read <span aria-label="required">*</span></label>
+          <input type="checkbox" id="is-read" name="is-read" required>
+        </div>
+      </form>
+      <button class="submit-button" onclick="getFormValues()">Submit</button>
+  </div>
   </div>  
 
   <div class="main-content">
@@ -22,29 +47,7 @@
     </div>
 
     <div class="book-catalog">
-      <div class="book-card">
-        <h1>Title</h1>
-        <h1>Author</h1>
-        <h1>100 Pages</h1>
-        <button id="toggle-read">Read</button>
-        <button id="delete-btn">Delete</button>
-      </div>
 
-      <div class="book-card">
-        <h1>Title</h1>
-        <h1>Author</h1>
-        <h1>100 Pages</h1>
-        <button id="toggle-read">Read</button>
-        <button id="delete-btn">Delete</button>
-      </div>
-
-      <div class="book-card">
-        <h1>Title</h1>
-        <h1>Author</h1>
-        <h1>100 Pages</h1>
-        <button id="toggle-read">Read</button>
-        <button id="delete-btn">Delete</button>
-      </div>
     </div>
   </div>
 </body>

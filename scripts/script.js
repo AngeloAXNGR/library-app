@@ -24,16 +24,13 @@ function Book(title, author, pages, isRead){
 }
 
 // **For Testing Purposes**
-let book1 = new Book('Harry Potter', 'J.K Rowling', 1000, false);
-let book2 = new Book('The Hobbit', 'J.R.R Tolkie', 1000, false);
-addBookToLibrary(book1);
-addBookToLibrary(book2);
+// let book1 = new Book('Harry Potter', 'J.K Rowling', 1000, false);
+// let book2 = new Book('The Hobbit', 'J.R.R Tolkie', 1000, false);
+// addBookToLibrary(book1);
+// addBookToLibrary(book2);
+
 
 // functions
-function addBookToLibrary(book){
-  library.push(book);
-}
-
 function render(){
   bookCatalog.innerHTML = '';
   displayBooks();
@@ -53,7 +50,7 @@ function displayBooks(){
     bookCard.appendChild(bookAuthor);
 
     let bookPages = document.createElement('h1');
-    bookPages.textContent = library[i].pages;
+    bookPages.textContent = `${library[i].pages} Pages`;
     bookCard.appendChild(bookPages);
 
     let readBtn = document.createElement('button');
@@ -89,5 +86,40 @@ function displayBooks(){
     bookCatalog.appendChild(bookCard);
   }
 }
+
+
+
+function getFormValues(){
+  let elements = document.getElementById("book-form").elements;
+  let title = elements.item(0);
+  let author = elements.item(1);
+  let pages = elements.item(2);
+  let isRead = elements.item(3);
+  let readState;
+  if(isRead.checked){
+      readState = true;
+  }else{readState = false}
+  
+  let book = new Book(title.value, author.value, pages.value, readState);
+  validateForm(book);
+  
+}
+
+function validateForm(book){
+  if(book.title === "" || book.author === "" || book.pages === ""){
+    alert("All fields should not be left empty.");
+    return false;
+  }else{
+    addBookToLibrary(book);
+  }
+}
+
+
+function addBookToLibrary(book){
+  library.push(book);
+  render();
+}
+
+
 
 render();
