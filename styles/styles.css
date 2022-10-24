@@ -46,7 +46,6 @@ body{
 
 .book-catalog{
   width: 100%;
-  /* border:solid 2px black; */
   margin: 20px 0;
   display:grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -85,10 +84,6 @@ body{
 
 
 
-
-
-
-
 #book-form{
   display:flex;
   flex-direction: column;
@@ -96,12 +91,33 @@ body{
 }
 
 
-.modal{
+#modal-cover{
+  background-color: gray;
+  width:100%;
+  height: 100%;
+  position:fixed;
+  text-align: center;
+  padding: 100px 0;
+  display:none; /*Modal Hidden by default*/
+  justify-content: center;
+  background-color: rgba(0,0,0,0.2);
+  z-index: 2;
+}
+
+#modal{
   display:flex;
+  width: 40%;
   flex-direction: column;
   gap:10px;
   background-color:white;
-  padding: 20px;
+  padding: 20px 100px;
+  position:fixed;
+  border-radius: 10px;
+}
+
+#book-form{
+  /* border:2px solid black; */
+  opacity: none;
 }
 
 .form-row label{
@@ -109,7 +125,8 @@ body{
   font-weight:700;
 }
 
-.submit-button{
+.submit-button,
+.close-button{
   width:100%;
   background-color: rgb(73, 226, 73);
   padding: 10px 20px;
@@ -117,6 +134,10 @@ body{
   border-radius: 10px;
   cursor:pointer;
   transition: background-color 0.1s;
+}
+
+.close-button{
+  background-color:rgb(253, 75, 75);
 }
 
 .submit-button:hover{

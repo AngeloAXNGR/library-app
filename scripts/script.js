@@ -5,6 +5,29 @@ let bookCatalog = document.querySelector('.book-catalog');
 let readBtn = document.querySelector('#toggle-read');
 
 
+// Modal button functionality
+let modal = document.querySelector("#modal-cover");
+let modalForm = document.querySelector("#modal");
+let addButton = document.querySelector("#add-button");
+let closeButton = document.querySelector(".close-button");
+
+window.onclick = function(e){
+  if(e.target == modal){
+    modal.style.display = "none";
+  }
+}
+
+closeButton.addEventListener('click', (e) =>{
+  resetForm();
+  modal.style.display = "none";
+})
+
+
+addButton.addEventListener('click', (e) =>{
+  modal.style.display = "flex";
+})
+
+
 // Constructor
 function Book(title, author, pages, isRead){
   this.title = title,
@@ -88,7 +111,6 @@ function displayBooks(){
 }
 
 
-
 function getFormValues(){
   let elements = document.getElementById("book-form").elements;
   let title = elements.item(0);
@@ -102,7 +124,12 @@ function getFormValues(){
   
   let book = new Book(title.value, author.value, pages.value, readState);
   validateForm(book);
-  
+
+}
+
+function resetForm(){
+  let form = document.getElementById("book-form");
+  form.reset();
 }
 
 function validateForm(book){
@@ -111,15 +138,14 @@ function validateForm(book){
     return false;
   }else{
     addBookToLibrary(book);
+    modal.style.display = "none";
   }
 }
 
 
 function addBookToLibrary(book){
   library.push(book);
+  resetForm();
   render();
 }
 
-
-
-render();
