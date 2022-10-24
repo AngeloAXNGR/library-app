@@ -74,8 +74,12 @@ body{
   width:100%;
 }
 
-#toggle-read{
+.green-button{
   background-color: rgb(90, 255, 90);
+}
+
+.red-button{
+  background-color: rgb(255, 115, 115);
 }
 
 #delete-btn{

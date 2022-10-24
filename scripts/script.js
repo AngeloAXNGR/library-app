@@ -47,10 +47,10 @@ function Book(title, author, pages, isRead){
 }
 
 // **For Testing Purposes**
-// let book1 = new Book('Harry Potter', 'J.K Rowling', 1000, false);
-// let book2 = new Book('The Hobbit', 'J.R.R Tolkie', 1000, false);
-// addBookToLibrary(book1);
-// addBookToLibrary(book2);
+let book1 = new Book('Harry Potter', 'J.K Rowling', 1000, false);
+let book2 = new Book('The Hobbit', 'J.R.R Tolkie', 1000, false);
+addBookToLibrary(book1);
+addBookToLibrary(book2);
 
 
 // functions
@@ -78,13 +78,29 @@ function displayBooks(){
 
     let readBtn = document.createElement('button');
     readBtn.setAttribute('id', 'toggle-read');
+    readBtn.setAttribute('data-id', i);
+
+
 
     // If true, set content to "Read"
     if(library[i].isRead){
       readBtn.textContent = "Read";
+      readBtn.classList.add('green-button');
     }else{
       readBtn.textContent = "Not Read";
+      readBtn.classList.add('red-button');
     }
+
+    readBtn.addEventListener('click', (e)=>{
+      let readBtnId = e.target.dataset.id;
+      if(library[readBtnId].isRead == false){
+        library[readBtnId].isRead = true;
+        render();
+      }else{
+        library[readBtnId].isRead = false;
+        render();
+      }
+    })
 
     bookCard.appendChild(readBtn);
 
@@ -98,18 +114,18 @@ function displayBooks(){
 
     // For testing purposes to check if it can get the id;
     // deleteBtn.addEventListener('click', (e) => console.log(e.target.dataset.id));
-
-    deleteBtn.addEventListener('click', (e)=>{
-      let deleteBtnId = e.target.dataset.id;
-      library.splice(deleteBtnId, 1);
-      console.log(library);
-      render();
-    })
+    deleteBtn.addEventListener('click',deleteBook);
 
     bookCatalog.appendChild(bookCard);
   }
 }
 
+function deleteBook(e){
+  let deleteBtnId = e.target.dataset.id;
+  library.splice(deleteBtnId, 1);
+  console.log(library);
+  render();
+}
 
 function getFormValues(){
   let elements = document.getElementById("book-form").elements;
