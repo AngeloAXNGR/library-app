@@ -47,16 +47,24 @@ function Book(title, author, pages, isRead){
 }
 
 // **For Testing Purposes**
-let book1 = new Book('Harry Potter', 'J.K Rowling', 1000, false);
-let book2 = new Book('The Hobbit', 'J.R.R Tolkie', 1000, false);
-addBookToLibrary(book1);
-addBookToLibrary(book2);
+// let book1 = new Book('Harry Potter', 'J.K Rowling', 1000, false);
+// let book2 = new Book('The Hobbit', 'J.R.R Tolkien', 1000, false);
+// addBookToLibrary(book1);
+// addBookToLibrary(book2);
 
 
 // functions
 function render(){
   bookCatalog.innerHTML = '';
-  displayBooks();
+  if(library.length === 0 ){
+    let emptyMessage = document.createElement('h1');
+    emptyMessage.textContent = "You have no books currently listed."
+    emptyMessage.classList.add('empty-list-message');
+    bookCatalog.appendChild(emptyMessage);
+  }else{
+    displayBooks();
+  }
+  
 }
 
 function displayBooks(){
@@ -76,11 +84,12 @@ function displayBooks(){
     bookPages.textContent = `${library[i].pages} Pages`;
     bookCard.appendChild(bookPages);
 
+    let buttonGroup = document.createElement('div');
+    buttonGroup.classList.add('button-group');
+
     let readBtn = document.createElement('button');
     readBtn.setAttribute('id', 'toggle-read');
     readBtn.setAttribute('data-id', i);
-
-
 
     // If true, set content to "Read"
     if(library[i].isRead){
@@ -91,18 +100,9 @@ function displayBooks(){
       readBtn.classList.add('red-button');
     }
 
-    readBtn.addEventListener('click', (e)=>{
-      let readBtnId = e.target.dataset.id;
-      if(library[readBtnId].isRead == false){
-        library[readBtnId].isRead = true;
-        render();
-      }else{
-        library[readBtnId].isRead = false;
-        render();
-      }
-    })
+    readBtn.addEventListener('click', toggleRead);
 
-    bookCard.appendChild(readBtn);
+    buttonGroup.appendChild(readBtn);
 
     let deleteBtn = document.createElement('button')
     deleteBtn.setAttribute('id', 'delete-btn');
@@ -110,12 +110,11 @@ function displayBooks(){
 
     // Assign an Id on delete Button
     deleteBtn.setAttribute('data-id', i);
-    bookCard.appendChild(deleteBtn);
+    buttonGroup.appendChild(deleteBtn);
 
-    // For testing purposes to check if it can get the id;
-    // deleteBtn.addEventListener('click', (e) => console.log(e.target.dataset.id));
     deleteBtn.addEventListener('click',deleteBook);
 
+    bookCard.appendChild(buttonGroup);
     bookCatalog.appendChild(bookCard);
   }
 }
@@ -125,6 +124,19 @@ function deleteBook(e){
   library.splice(deleteBtnId, 1);
   console.log(library);
   render();
+}
+
+function toggleRead(e){
+  let readBtnId = e.target.dataset.id;
+  if(library[readBtnId].isRead == false){
+    library[readBtnId].isRead = true;
+    render();
+    console.log(library);
+  }else{
+    library[readBtnId].isRead = false;
+    render();
+    console.log(library);
+  }
 }
 
 function getFormValues(){
@@ -165,3 +177,5 @@ function addBookToLibrary(book){
   render();
 }
 
+// Render data on start up
+render()

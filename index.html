@@ -25,11 +25,13 @@
         </div>
         <div class="form-row">
           <label for="page-count">Pages <span aria-label="required">*</span></label>
-          <input type="text" id="page-count" name="page-count" required>
+          <input type="number" id="page-count" name="page-count" required>
         </div>
         <div class="form-row">
-          <label for="is-read">Read <span aria-label="required">*</span></label>
-          <input type="checkbox" id="is-read" name="is-read" required>
+          <label for="is-read">Have you read it? <span aria-label="required">*</span>
+            <input type="checkbox" id="is-read" name="is-read" required>
+          </label>
+         
         </div>
       </form>
       <button class="submit-button" onclick="getFormValues()">Submit</button>

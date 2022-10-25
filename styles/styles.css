@@ -1,3 +1,11 @@
+/* Remove up and down arrows on number type inputs */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Reset CSS */
 *{
   margin:0;
   padding: 0;
@@ -26,11 +34,19 @@ body{
   font-size: 3rem;
 }
 
+#add-button{
+  border:1px solid gray;
+  border-radius: 10px;
+}
+
+#add-button:hover{
+  background-color: rgb(216, 214, 214);
+}
+
 .main-content{
-  /* border: 2px solid black; */
   width: 100%;
   margin: 20px 100px;
-  padding: 20px 100px;
+  padding: 0 100px;
   display:flex;
   flex-direction: column;
   align-items: center;
@@ -50,6 +66,16 @@ body{
   display:grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
+  text-align: center;
+  position:relative;
+}
+
+.empty-list-message{
+  position: absolute;
+  margin: 100px auto;
+  left:0;
+  right:0;
+  text-align:center;
 }
 
 .book-card{
@@ -57,11 +83,20 @@ body{
   display:flex;
   flex-direction:column;
   align-items: center;
-  text-align: center;
   gap: 20px;
+  justify-content: space-between;
   border-radius: 10px;
   padding: 20px;
 }
+
+.button-group{
+  display:flex;
+  flex-direction: column;
+  gap:20px;
+  width: 100%;
+}
+
+
 
 #toggle-read,
 #delete-btn{
@@ -110,7 +145,7 @@ body{
 
 #modal{
   display:flex;
-  width: 40%;
+  width: 600px;
   flex-direction: column;
   gap:10px;
   background-color:white;
@@ -119,14 +154,16 @@ body{
   border-radius: 10px;
 }
 
-#book-form{
-  /* border:2px solid black; */
-  opacity: none;
-}
 
 .form-row label{
   display:block;
   font-weight:700;
+  font-size: 2rem;
+  text-align: left;
+}
+
+.form-row input{
+  font-size: 2rem;
 }
 
 .submit-button,
@@ -138,6 +175,7 @@ body{
   border-radius: 10px;
   cursor:pointer;
   transition: background-color 0.1s;
+  font-size: 2rem;
 }
 
 .close-button{
@@ -147,5 +185,9 @@ body{
 .submit-button:hover{
   background-color: rgb(43, 192, 43);
   font-weight: 700;
-  /* transition: font-weight 0.5s; */
+}
+
+.close-button:hover{
+  background-color:rgb(253, 66, 66);
+  font-weight: 700;
 }
