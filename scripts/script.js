@@ -28,22 +28,18 @@ addButton.addEventListener('click', (e) =>{
 })
 
 
-// Constructor
-function Book(title, author, pages, isRead){
-  this.title = title,
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
-
-  this.info = function(){
+const bookFactory = (title, author, pages, isRead) =>{
+  const bookInfo = () =>{
     let text = '';
-    if(this.isRead){
+    if(isRead){
       text = 'has been read.'
     }else{
       text = 'has not been read.';
     }
-    return `${this.title} by ${this.author}, has ${this.pages} pages and ${text}`;
+
+    console.log(`${title} by ${author}, has ${pages} pages and ${text}`);
   }
+  return{title, author, pages, isRead, bookInfo}
 }
 
 // **For Testing Purposes**
@@ -150,7 +146,8 @@ function getFormValues(){
       readState = true;
   }else{readState = false}
   
-  let book = new Book(title.value, author.value, pages.value, readState);
+  let book = bookFactory(title.value, author.value, pages.value, readState);
+  console.log(book.bookInfo());
   validateForm(book);
 
 }
