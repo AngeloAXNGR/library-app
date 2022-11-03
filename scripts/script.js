@@ -44,7 +44,6 @@ const bookFactory = (title, author, pages, isRead) =>{
 
 const Library = (library) =>{
   let bookCatalog = document.querySelector('.book-catalog');
-  // let form = Form();
   // Render Book Functions
   const displayBooks = () =>{
     for(let i = 0; i <= library.length - 1; i++){
