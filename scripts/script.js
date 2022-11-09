@@ -27,21 +27,23 @@ const Modal = (() =>{
   return{modal}
 })();
 
-// Factory functions and modules
-const bookFactory = (title, author, pages, isRead) =>{
-  const bookInfo = () =>{
-    let text = '';
-    if(isRead){
-      text = 'has been read.'
-    }else{
-      text = 'has not been read.';
-    }
-
-    console.log(`${title} by ${author}, has ${pages} pages and ${text}`);
+// Book Class
+class Book{
+  constructor(title, author, pages, isRead){
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
   }
-  return{title, author, pages, isRead, bookInfo}
+
+  // getters
+  get bookDescription(){
+    return `${this.title} by ${this.author}, has ${this.pages} pages.`;
+  }
 }
 
+
+// Library Module
 const Library = (library) =>{
   let bookCatalog = document.querySelector('.book-catalog');
   // Render Book Functions
@@ -163,8 +165,7 @@ const Form = (() =>{
         readState = true;
     }else{readState = false}
     
-    let book = bookFactory(title.value, author.value, pages.value, readState);
-    console.log(book.bookInfo());
+    let book = new Book(title.value, author.value, pages.value, readState);
     console.log(book.title);
     validateForm(book);
   }
@@ -178,26 +179,3 @@ const Form = (() =>{
   return{getFormValues, validateForm, resetForm};
 })();
 
-
-// Render data on start up
-let books = Library(library);
-
-// **For Testing Purposes**
-// let book3 = bookFactory('The Hobbit', 'J.R.R Tolkien', 1000, false);
-let book1 = bookFactory('Harry Potter', 'J.K Rowling', 1000, false);
-let book2 = bookFactory('Harry Potter', 'J.K Rowling', 1000, false);
-let book3 = bookFactory('Harry Potter', 'J.K Rowling', 1000, false);
-let book4 = bookFactory('Harry Potter', 'J.K Rowling', 1000, false);
-let book5 = bookFactory('Harry Potter', 'J.K Rowling', 1000, false);
-let book6 = bookFactory('Harry Potter', 'J.K Rowling', 1000, false);
-let book7 = bookFactory('Harry Potter', 'J.K Rowling', 1000, false);
-
-books.addBookToLibrary(book1);
-books.addBookToLibrary(book2);
-books.addBookToLibrary(book3);
-books.addBookToLibrary(book4);
-books.addBookToLibrary(book5);
-books.addBookToLibrary(book6);
-books.addBookToLibrary(book7);
-
-books.render();
