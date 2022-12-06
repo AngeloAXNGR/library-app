@@ -5,6 +5,7 @@ body{
   display:flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 
@@ -12,16 +13,18 @@ body{
   padding: 30px 0;
   box-shadow: 0 0 5px rgba(0,0,0,0.5);
   width:100%;
+  background-color: rgb(255, 115, 0);
 }
 
 .application-title{
   font-size: 2rem;
   text-align: center;
   margin:0;
+  color:white;
 }
 
 .library-section{
-  border: 1px solid black;
+  /* border: 1px solid black; */
   display:flex;
   flex-direction: column;
   align-items: center;
@@ -31,12 +34,66 @@ body{
 }
 
 .add-button{
-  font-size:1rem;
+  font-size:2rem;
   padding: 10px 20px;
 }
 
 .book-catalog{
-  height: 100px;
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   width:100%;
-  border:1px solid blue;
+  gap: 20px;
+  /* border:1px solid blue; */
+}
+
+.book-card{
+  padding: 20px;
+  /* border: 1px solid red; */
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  box-shadow: 0 0 3px rgba(0,0,0,0.5);
+  gap: 20px;
+}
+
+.book-details{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.book-details > h1{
+  margin:0;
+}
+
+.button-group{
+  display:flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 80%;
+}
+
+.delete-button,
+.edit-button,
+.toggle-button{
+  font-size:1.5rem;
+  padding: 10px 20px;
+  border:none;
+  border-radius: 5px;
+}
+
+.toggle-button{
+  color:white;
+  background-color: rgb(118, 247, 118);
+}
+
+.delete-button{
+  color:white;
+  background-color: rgb(255, 110, 132);
+}
+
+.edit-button{
+  color:white;
+  background-color: rgb(79, 211, 255)
 }
