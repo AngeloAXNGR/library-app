@@ -7,8 +7,6 @@ export default class UI{
     UI.loadAddForm();
     UI.loadAddButton();
     UI.createBookCatalog();
-    // Storage.addBook(new Book('The Hobbit', 'Tolkien', 2000, false));
-    // Storage.getLibrary();
     UI.loadBooks();
   
   }
@@ -165,9 +163,22 @@ export default class UI{
     form.appendChild(formBtns);
     header.appendChild(form);
   }
+
   static openForm(){
     const form = document.querySelector('.book-form');
     form.classList.add('opened');
+    UI.clearForm();
+  }
+
+  static clearForm(){
+    const title = document.querySelector("#title");
+    const author = document.querySelector("#author");
+    const pageCount = document.querySelector("#pages");
+    const isRead = document.querySelector("#read");
+    title.value = "";
+    author.value ="";
+    pageCount.value = "";
+    isRead.checked = "false";
   }
 
   static closeForm(){
