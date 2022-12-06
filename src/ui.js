@@ -38,7 +38,10 @@ export default class UI{
 
   // Render Book Functionality
   static loadBooks(){
-    const library = Storage.getLibrary()
+    const bookCatalog = document.querySelector('.book-catalog');
+    bookCatalog.innerHTML = "";
+
+    const library = Storage.getLibrary();
     library.getBooks().forEach((book) =>{
       //Render Books Here
       UI.renderBookCard(book);
@@ -72,6 +75,11 @@ export default class UI{
    const addBtn = document.createElement('button') ;
    addBtn.classList.add('add-button');
    addBtn.textContent = 'Add Book';
+
+   addBtn.addEventListener('click', (e)=>{
+    Storage.addBook(new Book('The Hobbit', 'Tolkien', 2000, false));
+    UI.loadBooks();
+   });
   
    librarySection.appendChild(addBtn);
   }
@@ -80,6 +88,13 @@ export default class UI{
     const deleteBtn = document.createElement('button');
     deleteBtn.classList.add('delete-button');
     deleteBtn.textContent = 'Delete';
+    deleteBtn.addEventListener('click', (e)=>{
+      const bookTitle = e.target.parentNode.parentNode.firstElementChild.firstElementChild.textContent.trim();
+      console.log(bookTitle);
+      Storage.deleteBook(bookTitle);
+      // Storage.deleteProject(bookTitle);
+      UI.loadBooks();
+    })
     return deleteBtn;
   }
 

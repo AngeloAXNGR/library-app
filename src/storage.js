@@ -19,4 +19,10 @@ export default class Storage{
     library.addBooks(book);
     Storage.saveLibrary(library);
   }
+
+  static deleteBook(bookTitle){
+    let library = Storage.getLibrary();
+    library.deleteBook(bookTitle);
+    Storage.saveLibrary(library);
+  }
 }
