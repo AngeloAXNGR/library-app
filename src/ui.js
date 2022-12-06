@@ -4,12 +4,13 @@ export default class UI{
   static loadHomePage(){
     UI.createHeader();
     UI.createLibrarySection();
+    UI.loadAddForm();
     UI.loadAddButton();
     UI.createBookCatalog();
     // Storage.addBook(new Book('The Hobbit', 'Tolkien', 2000, false));
     // Storage.getLibrary();
     UI.loadBooks();
-    
+  
   }
 
   // UI Layout
@@ -43,7 +44,6 @@ export default class UI{
 
     const library = Storage.getLibrary();
     library.getBooks().forEach((book) =>{
-      //Render Books Here
       UI.renderBookCard(book);
     })
   }
@@ -55,8 +55,8 @@ export default class UI{
     bookCard.innerHTML = `
       <div class="book-details">
         <h1>${book.title}</h1>
-        <h1>${book.author}</h1>
-        <h1>${book.pageCount}</h1>
+        <h1>By: ${book.author}</h1>
+        <h1>${book.pageCount} Pages</h1>
       </div>
     `
     const btnGroup = document.createElement('div');
@@ -77,8 +77,7 @@ export default class UI{
    addBtn.textContent = 'Add Book';
 
    addBtn.addEventListener('click', (e)=>{
-    Storage.addBook(new Book('The Hobbit', 'Tolkien', 2000, false));
-    UI.loadBooks();
+    UI.openForm();
    });
   
    librarySection.appendChild(addBtn);
@@ -89,10 +88,8 @@ export default class UI{
     deleteBtn.classList.add('delete-button');
     deleteBtn.textContent = 'Delete';
     deleteBtn.addEventListener('click', (e)=>{
-      const bookTitle = e.target.parentNode.parentNode.firstElementChild.firstElementChild.textContent.trim();
-      console.log(bookTitle);
+      const bookTitle = e.target.parentNode.parentNode.firstElementChild.firstElementChild.textContent;
       Storage.deleteBook(bookTitle);
-      // Storage.deleteProject(bookTitle);
       UI.loadBooks();
     })
     return deleteBtn;
@@ -111,5 +108,90 @@ export default class UI{
     editBtn.textContent = 'Edit';
     return editBtn;
   }
+
+  static loadConfirmButton(){
+    const confirmBtn = document.createElement('button');
+    confirmBtn.classList.add('confirm-button');
+    confirmBtn.textContent = 'Confirm';
+    confirmBtn.addEventListener('click', (e)=>{
+      // const book = UI.getFormInputs();
+      // Storage.addBook(book);
+      // UI.closeForm();
+      // UI.loadBooks();
+      UI.getFormInputs();
+    })
+    return confirmBtn;
+  }
+
+  static loadCancelButton(){
+    const cancelBtn = document.createElement('button');
+    cancelBtn.classList.add('cancel-btn');
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.addEventListener('click', (e)=>{
+      e.preventDefault(); //prevents default form behavior (which is submit)
+      UI.closeForm();
+    })
+    return cancelBtn;
+  }
   // ======================================
+
+  // Forms
+  static loadAddForm(){
+    const header = document.querySelector('.header');
+    const form = document.createElement('form');
+    form.classList.add('book-form');
+    form.setAttribute('onsubmit', 'return false');
+    form.innerHTML = `
+      <div class="form-inputs">
+        <div class="form-row">
+          <input id="title" name="title" type="text" placeholder="Book Title" required/>
+        </div>
+        <div class="form-row">
+          <input id="author" name="author" type="text" placeholder="Book Author" required/>
+        </div>
+        <div class="form-row">
+          <input id="pages" name="pages" type="number" placeholder="e.g 1000" min="1" required/>
+        </div>
+        <div class="form-row">
+          <label for="read">Have you read the book?</label>
+          <input id="read" name="read" type="checkbox"/>
+        </div>
+      </div>
+    `
+
+    const formBtns = document.createElement('div');
+    formBtns.classList.add('form-buttons');
+    formBtns.append(UI.loadConfirmButton(), UI.loadCancelButton());
+    form.appendChild(formBtns);
+    header.appendChild(form);
+  }
+  static openForm(){
+    const form = document.querySelector('.book-form');
+    form.classList.add('opened');
+  }
+
+  static closeForm(){
+    const form = document.querySelector('.book-form');
+    form.classList.remove('opened');
+  }
+
+  static getFormInputs(){
+    const title = document.querySelector("#title").value;
+    const author = document.querySelector("#author").value;
+    const pageCount = document.querySelector("#pages").value;
+    const isRead = document.querySelector("#read").checked;
+    UI.validateFormInputs(title, author, pageCount, isRead);
+  }
+
+  static validateFormInputs(title, author, pageCount, isRead){
+    if(title === "" || author === ""|| pageCount ===""){
+      return
+    }else{
+      Storage.addBook(new Book(title, author,pageCount,isRead));
+      UI.closeForm();
+      UI.loadBooks();
+    }
+  }
+
+  // ==========================================
 }

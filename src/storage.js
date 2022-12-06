@@ -11,6 +11,7 @@ export default class Storage{
     library.setBooks(
       library.getBooks().map((book) => Object.assign(new Book(), book))
     );
+    console.log(library);
     return library;
   }
 

@@ -25,6 +25,7 @@ body{
 
 .library-section{
   /* border: 1px solid black; */
+  position:relative;
   display:flex;
   flex-direction: column;
   align-items: center;
@@ -54,6 +55,7 @@ body{
   align-items: center;
   box-shadow: 0 0 3px rgba(0,0,0,0.5);
   gap: 20px;
+  justify-content: space-between;
 }
 
 .book-details{
@@ -96,4 +98,76 @@ body{
 .edit-button{
   color:white;
   background-color: rgb(79, 211, 255)
+}
+
+
+.book-form{
+  position:absolute;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.9);
+  border-radius: 5px;
+  right:0;
+  left:0;
+  margin-left:auto;
+  margin-right:auto;
+  top: 35%;
+  padding: 20px;
+  width: 30%;
+  z-index: 1;
+  display:flex;
+  flex-direction: column;
+  text-align: center;
+  gap:10px;
+  opacity:0;
+  pointer-events: none;
+  transition: 150ms opacity ease-in-out;
+}
+
+.book-form.opened{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.form-inputs{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-row > input{
+  padding: 10px 20px;
+  font-size: 1.5rem;
+  width:100%;
+  box-sizing: border-box;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+}
+
+.form-row:last-child{
+  display:flex;
+}
+
+.form-row:last-child > label{
+  width:90%;
+  font-size: 1.5rem;
+}
+
+.form-row:last-child > input{
+  width:10%;
+}
+
+.form-buttons{
+  display:flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.form-buttons > button{
+  width:100%;
+  padding: 10px 20px;
+  font-size:1.5rem;
+}
+
+.form-row > input:invalid:required{
+   background-image: linear-gradient(to right, pink, lightgreen);
 }

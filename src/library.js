@@ -25,9 +25,12 @@ export default class Library{
 
 
   deleteBook(bookTitle) {
+    
     const bookToDelete = this.books.find(
       (book) => book.getTitle() === bookTitle
     );
+    console.log(bookToDelete);
     this.books.splice(this.books.indexOf(bookToDelete), 1)
   }
+
 }

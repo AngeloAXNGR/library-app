@@ -22,18 +22,18 @@ export default class Book{
     return this.isRead;
   }
 
-  setTitle(title){
-    this.title = title;
-  }
+  // setTitle(title){
+  //   this.title = title;
+  // }
 
-  setAuthor(author){
-    this.author = author
-  }
+  // setAuthor(author){
+  //   this.author = author
+  // }
 
-  setPageCount(pageCount){
-    this.pageCount = pageCount;
-  }
+  // setPageCount(pageCount){
+  //   this.pageCount = pageCount;
+  // }
 
-  setIsRead(isRead){
-    this.isRead = isRead};
+  // setIsRead(isRead){
+  //   this.isRead = isRead};
 }
